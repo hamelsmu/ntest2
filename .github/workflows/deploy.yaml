@@ -29,6 +29,7 @@ jobs:
       uses: actions/deploy-pages@v1
       
   update-metadata:
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
     - name: update website and description
