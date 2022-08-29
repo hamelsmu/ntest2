@@ -9,6 +9,19 @@ permissions:
   id-token: write
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - uses: fastai/workflows/quarto-ghp@master
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "./_docs"
+
   deploy:
     runs-on: ubuntu-latest
-    steps: [uses: fastai/workflows/quarto-ghp@master]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
