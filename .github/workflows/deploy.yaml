@@ -4,7 +4,7 @@ on:
     branches: [master, main]
   workflow_dispatch:
   
-# permissions: {pages: write, id-token: write, contents: write} 
+permissions: write-all #{pages: write, id-token: write, contents: write} 
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
         cfg = get_config()
         api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{secrets.GITHUB_TOKEN}}")
         res = api.enable_pages(branch='gh-pages')
-        # api.repos.update(homepage=f'{cfg.doc_host}/{cfg.doc_baseurl}', description=cfg.description)
+        api.repos.update(homepage=f'{cfg.doc_host}/{cfg.doc_baseurl}', description=cfg.description)
         print(res)
         
 
