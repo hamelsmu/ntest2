@@ -10,7 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
 #       - uses: actions/configure-pages@v2
-      - uses: fastai/workflows/quarto-ghp@master
+    - uses: fastai/workflows/quarto-ghp@master
+    - name: Enable github pages
+      run: |
+        from ghapi.core import GhApi
+        from nbdev.config import get_config
+        cfg = get_config()
+        api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{inputs.ghtoken}}")
+        res = api.enable_pages(branch='gh-pages')
+        print(res)
+      shell: python
 #       - uses: actions/upload-pages-artifact@v1
 #         with: {path: "./_docs"}
 
