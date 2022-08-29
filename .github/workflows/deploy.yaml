@@ -11,6 +11,7 @@ jobs:
     steps: 
     - uses: fastai/workflows/quarto-ghp@master
     - name: Enable github pages
+      shell: python
       run: |
         from ghapi.core import GhApi
         from nbdev.config import get_config
@@ -18,7 +19,6 @@ jobs:
         api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{inputs.ghtoken}}")
         res = api.enable_pages(branch='gh-pages')
         print(res)
-      shell: python
 
 
     
