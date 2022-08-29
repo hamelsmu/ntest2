@@ -4,7 +4,7 @@ on:
     branches: [master, main]
   workflow_dispatch:
   
-permissions: {pages: write, id-token: write, contents: write} 
+# permissions: {pages: write, id-token: write, contents: write} 
 
 jobs:
   build:
@@ -17,9 +17,9 @@ jobs:
         from ghapi.core import GhApi
         from nbdev.config import get_config
         cfg = get_config()
-        api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{secrets.HAMEL_TOKEN}}")
+        api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{secrets.GITHUB_TOKEN}}")
         res = api.enable_pages(branch='gh-pages')
-        api.repos.update(homepage=f'{cfg.doc_host}/{cfg.doc_baseurl}', description=cfg.description)
+        # api.repos.update(homepage=f'{cfg.doc_host}/{cfg.doc_baseurl}', description=cfg.description)
         print(res)
         
 
