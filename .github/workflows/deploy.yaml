@@ -11,16 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
     - uses: fastai/workflows/quarto-ghp@master
-    - name: Enable github pages
-      shell: python
-      run: |
-        from ghapi.core import GhApi
-        from nbdev.config import get_config
-        cfg = get_config()
-        api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{secrets.GITHUB_TOKEN}}")
-        res = api.enable_pages(branch='gh-pages')
-        api.repos.update(homepage=f'{cfg.doc_host}/{cfg.doc_baseurl}', description=cfg.description)
-        print(res)
+#     - name: Enable github pages
+#       shell: python
+#       run: |
+#         from ghapi.core import GhApi
+#         from nbdev.config import get_config
+#         cfg = get_config()
+#         api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{secrets.GITHUB_TOKEN}}")
+#         res = api.enable_pages(branch='gh-pages')
+#         api.repos.update(homepage=f'{cfg.doc_host}/{cfg.doc_baseurl}', description=cfg.description)
+#         print(res)
         
 
 
