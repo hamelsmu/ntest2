@@ -30,16 +30,7 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v1
-    - name: test outputs
-      run: |
-        echo "description ${{ needs.build.outputs.description }}"
-        echo "keywords ${{ needs.build.outputs.keywords }}"
-        echo "docs_url ${{ needs.build.outputs.docs_url }}"
-    - name: update website and description
-      run: |
-        curl -X PATCH -H "Accept: application/vnd.github+json" -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" \
-        -d '{"homepage":"${{steps.deployment.outputs.page_url}}", "description":"${{steps.deployment.outputs.description}}"}' \
-        https://api.github.com/repos/${{github.repository}}
+
     
 
 
