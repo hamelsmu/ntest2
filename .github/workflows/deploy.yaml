@@ -8,14 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      description: ${{ steps.ghp.outputs.description }}
-      keywords: ${{ steps.ghp.outputs.keywords }}
-      docs_url: ${{ steps.ghp.outputs.docs_url }}
     steps: 
       - uses: actions/configure-pages@v2
       - uses: fastai/workflows/quarto-ghp@master
-        id: ghp
       - uses: actions/upload-pages-artifact@v1
         with: {path: "./_docs"}
 
