@@ -17,7 +17,7 @@ jobs:
         from ghapi.core import GhApi
         from nbdev.config import get_config
         cfg = get_config()
-        api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{secrets.GITHUB_TOKEN}}")
+        api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{secrets.HAMEL_TOKEN}}")
         res = api.enable_pages(branch='gh-pages')
         print(res)
         
