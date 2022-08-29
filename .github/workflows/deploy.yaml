@@ -31,6 +31,8 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           /repos/OWNER/REPO \
          -f homepage='${{ steps.deployment.outputs.page_url }}'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
 
         
