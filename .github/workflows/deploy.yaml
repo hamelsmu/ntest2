@@ -29,9 +29,10 @@ jobs:
       uses: actions/deploy-pages@v1
     - name: update website and description
       run: |
-        gh api --method PATCH \
-         -H "Accept: application/vnd.github+json" /repos/${GITHUB_REPOSITORY} \
-         -f homepage='${{needs.deploy.outputs.url}}'
+        curl -X PATCH \
+        -H "Accept: application/vnd.github+json" \ 
+        -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/${GITHUB_REPOSITORY} \
+        -d '{"homepage":"${{needs.deploy.outputs.url}}"}'
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
