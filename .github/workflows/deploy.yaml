@@ -9,7 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps: 
-#       - uses: actions/configure-pages@v2
     - uses: fastai/workflows/quarto-ghp@master
     - name: Enable github pages
       run: |
@@ -20,20 +19,7 @@ jobs:
         res = api.enable_pages(branch='gh-pages')
         print(res)
       shell: python
-#       - uses: actions/upload-pages-artifact@v1
-#         with: {path: "./_docs"}
 
-#   deploy:
-#     runs-on: ubuntu-latest
-#     needs: build
-#     permissions: {pages: write, id-token: write}
-#     environment:
-#       name: github-pages
-#       url: ${{ steps.deployment.outputs.page_url }}
-#     steps:
-#     - name: Deploy to GitHub Pages
-#       id: deployment
-#       uses: actions/deploy-pages@v1
 
     
 
