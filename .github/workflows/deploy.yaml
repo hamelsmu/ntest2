@@ -8,9 +8,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      description: ${{ steps.ghp.outputs.description }}
+      keywords: ${{ steps.ghp.outputs.keywords }}
+      docs_url: ${{ steps.ghp.outputs.docs_url }}
     steps: 
       - uses: actions/configure-pages@v2
       - uses: fastai/workflows/quarto-ghp@master
+        id: ghp
       - uses: actions/upload-pages-artifact@v1
         with: {path: "./_docs"}
 
@@ -25,6 +30,11 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v1
+    - name: test outputs
+      run: |
+        echo "description ${{ needs.build.outputs.description }}"
+        echo "keywords ${{ needs.build.outputs.keywords }}"
+        echo "docs_url ${{ needs.build.outputs.docs_url }}
     - name: update website and description
       run: |
         curl -X PATCH -H "Accept: application/vnd.github+json" -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" \
