@@ -16,8 +16,6 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    outputs:
-      url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     permissions: write-all # {pages: write, id-token: write, contents: write}
     environment:
@@ -32,7 +30,7 @@ jobs:
         curl -X PATCH \
         -H "Accept: application/vnd.github+json" \ 
         -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/${GITHUB_REPOSITORY} \
-        -d '{"homepage":"${{needs.deploy.outputs.url}}"}'
+        -d '{"homepage":"${{steps.deployment.outputs.page_url}}"}'
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
