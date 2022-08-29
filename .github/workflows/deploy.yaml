@@ -19,7 +19,7 @@ jobs:
     outputs:
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
-    permissions: {pages: write, id-token: write}
+    permissions: {pages: write, id-token: write, contents: write}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -27,18 +27,15 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v1
-      
-  update-metadata:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
     - name: update website and description
       run: |
         gh api --method PATCH \
-         -H "Accept: application/vnd.github+json" /repos/OWNER/REPO \
+         -H "Accept: application/vnd.github+json" /repos/${GITHUB_REPOSITORY} \
          -f homepage='${{needs.deploy.outputs.url}}'
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+
  
 
         
